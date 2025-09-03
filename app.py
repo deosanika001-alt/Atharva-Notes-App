@@ -5,9 +5,6 @@ from bson.objectid import ObjectId
 from datetime import datetime
 from typing import Optional, List, Dict
 
-# -------------------------
-# CONFIG (replace with your own URI; you asked NOT to use env)
-# -------------------------
 # Example URI formats:
 # - MongoDB Atlas (SRV): "mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/mydatabase?retryWrites=true&w=majority"
 # - Local: "mongodb://localhost:27017"
@@ -86,8 +83,8 @@ def delete_note(collection, note_id: str) -> bool:
 # -------------------------
 # UI
 # -------------------------
-st.set_page_config(page_title="Mongo Notes — Streamlit CRUD", page_icon="🗒️", layout="wide")
-st.title("🗒️ MongoDB Notes App (Streamlit + PyMongo)")
+st.set_page_config(page_title="Atharva Notes App", page_icon="🗒️", layout="wide")
+st.title("🗒️ Atharva Notes App ")
 
 # Connect to DB
 try:
