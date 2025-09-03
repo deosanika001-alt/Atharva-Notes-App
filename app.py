@@ -243,4 +243,4 @@ elif mode == "Raw DB status":
 # Footer / hints
 # -------------------------
 st.markdown("---")
-st.caption("Notes app — uses PyMongo + Streamlit. Replace MONGO_URI at top of this file with your connection string. Date/times stored in UTC.")
+st.caption("This Notes App is made by Atharva Yogesh Deorukhkar")
