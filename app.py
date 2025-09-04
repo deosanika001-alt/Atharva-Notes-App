@@ -10,7 +10,7 @@ notes_collection = db["notes"]
 
 # ------------------ Streamlit UI ------------------
 st.set_page_config(page_title="Notes App", page_icon="📝", layout="centered")
-st.title("📝 Notes App (CRUD + Search)")
+st.title("📝 Atharva Notes App")
 
 menu = ["Create", "Read", "Update", "Delete", "Search"]
 choice = st.sidebar.selectbox("Menu", menu)
@@ -89,3 +89,4 @@ elif choice == "Search":
                 st.markdown("---")
         else:
             st.warning("No matching notes found.")
+
