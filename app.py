@@ -1,16 +1,21 @@
 import streamlit as st
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+import certifi
 
 # ------------------ MongoDB Connection ------------------
-# Replace with your own MongoDB connection string
-client = MongoClient("mongodb+srv://deosanika001_db_user:lolSju3x8UIkxovW@cluster0.oqus1qt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+# Replace <username>, <password>, and <cluster> with your details
+client = MongoClient(
+    "mongodb+srv://deosanika001_db_user:lolSju3x8UIkxovW@cluster0.oqus1qt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    tlsCAFile=certifi.where()
+)
+
 db = client["notes_db"]
 notes_collection = db["notes"]
 
 # ------------------ Streamlit UI ------------------
 st.set_page_config(page_title="Notes App", page_icon="📝", layout="centered")
-st.title("📝 Atharva Notes App")
+st.title("📝 Notes App (CRUD + Search)")
 
 menu = ["Create", "Read", "Update", "Delete", "Search"]
 choice = st.sidebar.selectbox("Menu", menu)
@@ -43,30 +48,36 @@ elif choice == "Read":
 elif choice == "Update":
     st.subheader("✏️ Update a Note")
     notes = list(notes_collection.find())
-    note_titles = [note["title"] for note in notes]
-    selected = st.selectbox("Select a note to update", note_titles)
+    if notes:
+        note_titles = [note["title"] for note in notes]
+        selected = st.selectbox("Select a note to update", note_titles)
 
-    note = notes_collection.find_one({"title": selected})
-    new_title = st.text_input("New Title", value=note["title"])
-    new_content = st.text_area("New Content", value=note["content"])
+        note = notes_collection.find_one({"title": selected})
+        new_title = st.text_input("New Title", value=note["title"])
+        new_content = st.text_area("New Content", value=note["content"])
 
-    if st.button("Update"):
-        notes_collection.update_one(
-            {"_id": note["_id"]},
-            {"$set": {"title": new_title, "content": new_content}},
-        )
-        st.success("✅ Note updated successfully!")
+        if st.button("Update"):
+            notes_collection.update_one(
+                {"_id": note["_id"]},
+                {"$set": {"title": new_title, "content": new_content}},
+            )
+            st.success("✅ Note updated successfully!")
+    else:
+        st.warning("⚠️ No notes found to update.")
 
 # ------------------ DELETE ------------------
 elif choice == "Delete":
     st.subheader("🗑️ Delete a Note")
     notes = list(notes_collection.find())
-    note_titles = [note["title"] for note in notes]
-    selected = st.selectbox("Select a note to delete", note_titles)
+    if notes:
+        note_titles = [note["title"] for note in notes]
+        selected = st.selectbox("Select a note to delete", note_titles)
 
-    if st.button("Delete"):
-        notes_collection.delete_one({"title": selected})
-        st.success("🗑️ Note deleted successfully!")
+        if st.button("Delete"):
+            notes_collection.delete_one({"title": selected})
+            st.success("🗑️ Note deleted successfully!")
+    else:
+        st.warning("⚠️ No notes found to delete.")
 
 # ------------------ SEARCH ------------------
 elif choice == "Search":
@@ -89,4 +100,3 @@ elif choice == "Search":
                 st.markdown("---")
         else:
             st.warning("No matching notes found.")
-
