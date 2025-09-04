@@ -10,7 +10,7 @@ from typing import Optional, List, Dict
 # - Local: "mongodb://localhost:27017"
 #mongodb+srv://deosanika001_db_user:iffCWcxW0eLVQ6ES@cluster0.telweny.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 #mongodb+srv://deosanika001_db_user:iffCWcxW0eLVQ6ES@cluster0.telweny.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-MONGO_URI = "mongodb+srv://deosanika001_db_user:iffCWcxW0eLVQ6ES@cluster0.telweny.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = "mongodb+srv://deosanika001_db_user:lolSju3x8UIkxovW@cluster0.oqus1qt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 DB_NAME = "notesdb"
 COLLECTION_NAME = "notes"
 
