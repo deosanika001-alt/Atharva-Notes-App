@@ -1,2 +1,4 @@
-streamlit>=1.20
-pymongo>=4.0
+streamlit
+pymongo
+dnspython
+certifi
